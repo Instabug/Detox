@@ -22,7 +22,7 @@ class Matcher {
     this._call = invoke.callDirectly(DetoxMatcherApi.matcherForNot(this));
     return this;
   }
-  
+
   _avoidProblematicReactNativeElements() {
     /*
     const _originalMatcherCall = this._call;
@@ -37,7 +37,7 @@ class Matcher {
     */
     return this;
   }
-  
+
   _extendPickerViewMatching() {
     return this;
   }
@@ -54,6 +54,13 @@ class IdMatcher extends Matcher {
   constructor(value) {
     super();
     this._call = invoke.callDirectly(DetoxMatcherApi.matcherForTestId(value));
+  }
+}
+
+class ResourceNameMatcher extends Matcher {
+  constructor(value) {
+    super();
+    this._call = invoke.callDirectly(DetoxMatcherApi.matcherForResouceName(value));
   }
 }
 
@@ -111,7 +118,8 @@ class ValueMatcher extends Matcher {
 class TraitsMatcher extends Matcher {
   constructor(value) {
     super();
-    if ((typeof value !== 'object') || (!value instanceof Array)) throw new Error(`TraitsMatcher ctor argument must be an array, got ${typeof value}`);
+    if (typeof value !== 'object' || !value instanceof Array)
+      throw new Error(`TraitsMatcher ctor argument must be an array, got ${typeof value}`);
 
     this._call = invoke.callDirectly(DetoxMatcherApi.matcherForAnything());
   }
@@ -121,6 +129,7 @@ module.exports = {
   Matcher,
   LabelMatcher,
   IdMatcher,
+  ResourceNameMatcher,
   TypeMatcher,
   TraitsMatcher,
   VisibleMatcher,

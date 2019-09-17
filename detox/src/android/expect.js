@@ -9,6 +9,7 @@ const DetoxMatcherApi = require('./espressoapi/DetoxMatcher');
 const Matcher = matchers.Matcher;
 const LabelMatcher = matchers.LabelMatcher;
 const IdMatcher = matchers.IdMatcher;
+const ResourceNameMatcher = matchers.ResourceNameMatcher;
 const TypeMatcher = matchers.TypeMatcher;
 const TraitsMatcher = matchers.TraitsMatcher;
 const VisibleMatcher = matchers.VisibleMatcher;
@@ -292,6 +293,9 @@ class ExpectElement extends Expect {
   async toHaveId(value) {
     return await new MatcherAssertionInteraction(this._invocationManager, this._element, new IdMatcher(value)).execute();
   }
+  async toHaveResourceNameMatcher(value) {
+    return await new MatcherAssertionInteraction(this._invocationManager, this._element, new ResourceNameMatcher(value)).execute();
+  }
   async toHaveValue(value) {
     return await new MatcherAssertionInteraction(this._invocationManager, this._element, new ValueMatcher(value)).execute();
   }
@@ -337,13 +341,14 @@ class AndroidExpect {
     this._invocationManager = invocationManager;
 
     this.by = {
-      accessibilityLabel: value => new LabelMatcher(value),
-      label: value => new LabelMatcher(value),
-      id: value => new IdMatcher(value),
-      type: value => new TypeMatcher(value),
-      traits: value => new TraitsMatcher(value),
-      value: value => new ValueMatcher(value),
-      text: value => new TextMatcher(value)
+      accessibilityLabel: (value) => new LabelMatcher(value),
+      label: (value) => new LabelMatcher(value),
+      id: (value) => new IdMatcher(value),
+      nativeId: (value) => new ResourceNameMatcher(value),
+      type: (value) => new TypeMatcher(value),
+      traits: (value) => new TraitsMatcher(value),
+      value: (value) => new ValueMatcher(value),
+      text: (value) => new TextMatcher(value)
     };
 
     this.element = this.element.bind(this);

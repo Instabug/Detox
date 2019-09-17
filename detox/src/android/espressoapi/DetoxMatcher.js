@@ -4,7 +4,6 @@
 	For more information see generation/README.md.
 */
 
-
 function sanitize_matcher(matcher) {
   if (!matcher._call) {
     return matcher;
@@ -12,134 +11,165 @@ function sanitize_matcher(matcher) {
 
   const originalMatcher = typeof matcher._call === 'function' ? matcher._call() : matcher._call;
   return originalMatcher.type ? originalMatcher.value : originalMatcher;
-} 
+}
 class DetoxMatcher {
   static matcherForText(text) {
-    if (typeof text !== "string") throw new Error("text should be a string, but got " + (text + (" (" + (typeof text + ")"))));
+    if (typeof text !== 'string') throw new Error('text should be a string, but got ' + (text + (' (' + (typeof text + ')'))));
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForText",
+      method: 'matcherForText',
       args: [text]
     };
   }
 
   static matcherForContentDescription(contentDescription) {
-    if (typeof contentDescription !== "string") throw new Error("contentDescription should be a string, but got " + (contentDescription + (" (" + (typeof contentDescription + ")"))));
+    if (typeof contentDescription !== 'string')
+      throw new Error(
+        'contentDescription should be a string, but got ' + (contentDescription + (' (' + (typeof contentDescription + ')')))
+      );
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForContentDescription",
+      method: 'matcherForContentDescription',
       args: [contentDescription]
     };
   }
 
   static matcherForTestId(testId) {
-    if (typeof testId !== "string") throw new Error("testId should be a string, but got " + (testId + (" (" + (typeof testId + ")"))));
+    if (typeof testId !== 'string') throw new Error('testId should be a string, but got ' + (testId + (' (' + (typeof testId + ')'))));
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForTestId",
+      method: 'matcherForTestId',
       args: [testId]
+    };
+  }
+
+  static matcherForResouceName(resourceName) {
+    if (typeof resourceName !== 'string')
+      throw new Error('resourceName should be a string, but got ' + (resourceName + (' (' + (typeof resourceName + ')'))));
+    return {
+      target: {
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
+      },
+      method: 'matcherForResouceName',
+      args: [resourceName]
     };
   }
 
   static matcherForAnd(m1, m2) {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForAnd",
-      args: [{
-        type: "Invocation",
-        value: sanitize_matcher(m1)
-      }, {
-        type: "Invocation",
-        value: sanitize_matcher(m2)
-      }]
+      method: 'matcherForAnd',
+      args: [
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(m1)
+        },
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(m2)
+        }
+      ]
     };
   }
 
   static matcherForOr(m1, m2) {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForOr",
-      args: [{
-        type: "Invocation",
-        value: sanitize_matcher(m1)
-      }, {
-        type: "Invocation",
-        value: sanitize_matcher(m2)
-      }]
+      method: 'matcherForOr',
+      args: [
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(m1)
+        },
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(m2)
+        }
+      ]
     };
   }
 
   static matcherForNot(m) {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForNot",
-      args: [{
-        type: "Invocation",
-        value: sanitize_matcher(m)
-      }]
+      method: 'matcherForNot',
+      args: [
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(m)
+        }
+      ]
     };
   }
 
   static matcherWithAncestor(m, ancestorMatcher) {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherWithAncestor",
-      args: [{
-        type: "Invocation",
-        value: sanitize_matcher(m)
-      }, {
-        type: "Invocation",
-        value: sanitize_matcher(ancestorMatcher)
-      }]
+      method: 'matcherWithAncestor',
+      args: [
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(m)
+        },
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(ancestorMatcher)
+        }
+      ]
     };
   }
 
   static matcherWithDescendant(m, descendantMatcher) {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherWithDescendant",
-      args: [{
-        type: "Invocation",
-        value: sanitize_matcher(m)
-      }, {
-        type: "Invocation",
-        value: sanitize_matcher(descendantMatcher)
-      }]
+      method: 'matcherWithDescendant',
+      args: [
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(m)
+        },
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(descendantMatcher)
+        }
+      ]
     };
   }
 
   static matcherForClass(className) {
-    if (typeof className !== "string") throw new Error("className should be a string, but got " + (className + (" (" + (typeof className + ")"))));
+    if (typeof className !== 'string')
+      throw new Error('className should be a string, but got ' + (className + (' (' + (typeof className + ')'))));
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForClass",
+      method: 'matcherForClass',
       args: [className]
     };
   }
@@ -147,10 +177,10 @@ class DetoxMatcher {
   static matcherForSufficientlyVisible() {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForSufficientlyVisible",
+      method: 'matcherForSufficientlyVisible',
       args: []
     };
   }
@@ -158,10 +188,10 @@ class DetoxMatcher {
   static matcherForNotVisible() {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForNotVisible",
+      method: 'matcherForNotVisible',
       args: []
     };
   }
@@ -169,10 +199,10 @@ class DetoxMatcher {
   static matcherForNotNull() {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForNotNull",
+      method: 'matcherForNotNull',
       args: []
     };
   }
@@ -180,43 +210,45 @@ class DetoxMatcher {
   static matcherForNull() {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForNull",
+      method: 'matcherForNull',
       args: []
     };
   }
 
   static matcherForAtIndex(index, innerMatcher) {
-    if (typeof index !== "number") throw new Error("index should be a number, but got " + (index + (" (" + (typeof index + ")"))));
+    if (typeof index !== 'number') throw new Error('index should be a number, but got ' + (index + (' (' + (typeof index + ')'))));
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForAtIndex",
-      args: [{
-        type: "Integer",
-        value: index
-      }, {
-        type: "Invocation",
-        value: sanitize_matcher(innerMatcher)
-      }]
+      method: 'matcherForAtIndex',
+      args: [
+        {
+          type: 'Integer',
+          value: index
+        },
+        {
+          type: 'Invocation',
+          value: sanitize_matcher(innerMatcher)
+        }
+      ]
     };
   }
 
   static matcherForAnything() {
     return {
       target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxMatcher"
+        type: 'Class',
+        value: 'com.wix.detox.espresso.DetoxMatcher'
       },
-      method: "matcherForAnything",
+      method: 'matcherForAnything',
       args: []
     };
   }
-
 }
 
 module.exports = DetoxMatcher;

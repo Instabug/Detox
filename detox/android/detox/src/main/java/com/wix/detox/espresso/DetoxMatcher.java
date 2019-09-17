@@ -47,6 +47,10 @@ public class DetoxMatcher {
         return allOf(withTagValue(is((Object) testId)), withEffectiveVisibility(Visibility.VISIBLE));
     }
 
+    public static Matcher<View> matcherForResourceName(String resourceName) {
+        return allOf(withResourceName(resourceName), withEffectiveVisibility(Visibility.VISIBLE));
+    }
+
     public static Matcher<View> matcherForAnd(Matcher<View> m1, Matcher<View> m2) {
         return allOf(m1, m2);
     }

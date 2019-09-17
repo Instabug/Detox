@@ -43,7 +43,7 @@ detox.invoke.execute(_getInteraction2);
 
 */
 
-class Action { }
+class Action {}
 
 class TapAction extends Action {
   constructor() {
@@ -117,7 +117,14 @@ class ClearTextAction extends Action {
 class ScrollAmountAction extends Action {
   constructor(direction, amount, startScrollX = NaN, startScrollY = NaN) {
     super();
-    this._call = invoke.callDirectly(GreyActions.actionForScrollInDirectionAmountXOriginStartPercentageYOriginStartPercentage(direction, amount, startScrollX, startScrollY));
+    this._call = invoke.callDirectly(
+      GreyActions.actionForScrollInDirectionAmountXOriginStartPercentageYOriginStartPercentage(
+        direction,
+        amount,
+        startScrollX,
+        startScrollY
+      )
+    );
   }
 }
 
@@ -139,17 +146,17 @@ class SwipeAction extends Action {
       let x, y;
       const eps = 10 ** -8;
       switch (direction) {
-        case "left":
-          x = percentage, y = eps;
+        case 'left':
+          (x = percentage), (y = eps);
           break;
-        case "right":
-          x = percentage, y = eps;
+        case 'right':
+          (x = percentage), (y = eps);
           break;
-        case "up":
-          y = percentage, x = eps;
+        case 'up':
+          (y = percentage), (x = eps);
           break;
-        case "down":
-          y = percentage, x = eps;
+        case 'down':
+          (y = percentage), (x = eps);
           break;
       }
 
@@ -177,7 +184,7 @@ class SwipeAction extends Action {
 }
 
 class ScrollColumnToValue extends Action {
-  constructor(column,value) {
+  constructor(column, value) {
     super();
     this._call = invoke.callDirectly(GreyActions.actionForSetPickerColumnToValue(column, value));
   }
@@ -254,14 +261,19 @@ class WaitForActionInteraction extends Interaction {
     super(invocationManager);
     //if (!(element instanceof Element)) throw new Error(`WaitForActionInteraction ctor 1st argument must be a valid Element, got ${typeof element}`);
     //if (!(matcher instanceof Matcher)) throw new Error(`WaitForActionInteraction ctor 2nd argument must be a valid Matcher, got ${typeof matcher}`);
-    if (!(searchMatcher instanceof Matcher)) throw new Error(`WaitForActionInteraction ctor 3rd argument must be a valid Matcher, got ${typeof searchMatcher}`);
+    if (!(searchMatcher instanceof Matcher))
+      throw new Error(`WaitForActionInteraction ctor 3rd argument must be a valid Matcher, got ${typeof searchMatcher}`);
     this._element = element;
     this._originalMatcher = matcher;
     this._searchMatcher = searchMatcher;
   }
 
   async _execute(searchAction) {
-    const _interactionCall = GreyInteraction.usingSearchActionOnElementWithMatcher(invoke.callDirectly(callThunk(this._element)), callThunk(searchAction), callThunk(this._searchMatcher));
+    const _interactionCall = GreyInteraction.usingSearchActionOnElementWithMatcher(
+      invoke.callDirectly(callThunk(this._element)),
+      callThunk(searchAction),
+      callThunk(this._searchMatcher)
+    );
 
     this._call = GreyInteraction.assertWithMatcher(invoke.callDirectly(_interactionCall), callThunk(this._originalMatcher));
     await this.execute();
@@ -280,9 +292,10 @@ class Element {
     this._selectElementWithMatcher(this._originalMatcher);
   }
   _selectElementWithMatcher(matcher) {
-    if (!(matcher instanceof Matcher)) throw new Error(`Element _selectElementWithMatcher argument must be a valid Matcher, got ${typeof matcher}`);
+    if (!(matcher instanceof Matcher))
+      throw new Error(`Element _selectElementWithMatcher argument must be a valid Matcher, got ${typeof matcher}`);
     this._call = invoke.call(invoke.EarlGrey.instance, 'detox_selectElementWithMatcher:', matcher._call);
-    if(this._atIndex !== undefined) {
+    if (this._atIndex !== undefined) {
       this.atIndex(this._atIndex);
     }
   }
@@ -326,7 +339,11 @@ class Element {
   async scroll(amount, direction = 'down', startScrollX, startScrollY) {
     // override the user's element selection with an extended matcher that looks for UIScrollView children
     this._selectElementWithMatcher(this._originalMatcher._extendToDescendantScrollViews());
-    return await new ActionInteraction(this._invocationManager, this, new ScrollAmountAction(direction, amount, startScrollX, startScrollY)).execute();
+    return await new ActionInteraction(
+      this._invocationManager,
+      this,
+      new ScrollAmountAction(direction, amount, startScrollX, startScrollY)
+    ).execute();
   }
   async scrollTo(edge) {
     // override the user's element selection with an extended matcher that looks for UIScrollView children
@@ -338,7 +355,7 @@ class Element {
     this._selectElementWithMatcher(this._originalMatcher._avoidProblematicReactNativeElements());
     return await new ActionInteraction(this._invocationManager, this, new SwipeAction(direction, speed, percentage)).execute();
   }
-  async setColumnToValue(column,value) {
+  async setColumnToValue(column, value) {
     // override the user's element selection with an extended matcher that supports RN's date picker
     this._selectElementWithMatcher(this._originalMatcher._extendPickerViewMatching());
     return await new ActionInteraction(this._invocationManager, this, new ScrollColumnToValue(column, value)).execute();
@@ -378,6 +395,9 @@ class ExpectElement extends Expect {
     return await new MatcherAssertionInteraction(this._invocationManager, this._element, new LabelMatcher(value)).execute();
   }
   async toHaveId(value) {
+    return await new MatcherAssertionInteraction(this._invocationManager, this._element, new IdMatcher(value)).execute();
+  }
+  async toHaveNativeId(value) {
     return await new MatcherAssertionInteraction(this._invocationManager, this._element, new IdMatcher(value)).execute();
   }
   async toHaveValue(value) {
@@ -428,6 +448,7 @@ class IosExpect {
       accessibilityLabel: (value) => new LabelMatcher(value),
       label: (value) => new LabelMatcher(value),
       id: (value) => new IdMatcher(value),
+      nativeId: (value) => new IdMatcher(value),
       type: (value) => new TypeMatcher(value),
       traits: (value) => new TraitsMatcher(value),
       value: (value) => new ValueMatcher(value),
