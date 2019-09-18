@@ -1,0 +1,4 @@
+#Tue Sep 17 00:32:32 EET 2019
+base.0=/Users/aliabdelfattah/Documents/Instabug/Dev_Apps/Instabug-React-Native/InstabugSample/node_modules/detox/android/detox/build/intermediates/dex/debugAndroidTest/mergeDexDebugAndroidTest/out
+path.0=classes.dex
+renamed.0=classes.dex

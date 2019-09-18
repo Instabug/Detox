@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/aliabdelfattah/Documents/Instabug/Dev_Apps/Instabug-React-Native/InstabugSample/node_modules/detox/android/detox/build/intermediates/res/merged/androidTest/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/aliabdelfattah/Documents/Instabug/Dev_Apps/Instabug-React-Native/InstabugSample/node_modules/detox/android/detox/build/intermediates/packaged_res/debug/values/values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "42",
+                        "endOffsets": "93"
+                    }
+                },
+                {
+                    "source": "/Users/aliabdelfattah/.gradle/caches/transforms-2/files-2.1/c68e00b5cf67577344b935fd5ed1b548/res/values/values.xml",
+                    "from": {
+                        "startLines": "4,7,10",
+                        "startColumns": "0,0,0",
+                        "startOffsets": "176,327,474",
+                        "endLines": "6,9,12",
+                        "endColumns": "8,8,8",
+                        "endOffsets": "326,473,622"
+                    },
+                    "to": {
+                        "startLines": "3,6,9",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "98,253,404",
+                        "endLines": "5,8,11",
+                        "endColumns": "8,8,8",
+                        "endOffsets": "248,399,552"
+                    }
+                }
+            ]
+        }
+    ]
+}

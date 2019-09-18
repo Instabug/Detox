@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Sep 16 21:28:04 EET 2019
+0.baseType=DIRECTORY
+0.base=/Users/aliabdelfattah/Documents/Instabug/Dev_Apps/Instabug-React-Native/InstabugSample/node_modules/detox/android/detox/build/intermediates/dex/debugAndroidTest/mergeDexDebugAndroidTest/out
+0.path=classes.dex
+0.set=DEX
+count=1
